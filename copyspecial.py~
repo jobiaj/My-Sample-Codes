@@ -1,0 +1,29 @@
+import sys
+import re
+import shutil
+import commands
+def get_special_paths(dir_name):
+	paths = []
+	files = os.listdir(dir_name)
+	for i in files:
+		special = re.search(r'__(\w+\w+)__',i)
+		if special:
+			paths.append(os.path.abspath(i))
+
+	return paths
+
+
+def copy_to(path,directory):
+	efile=get_special_path(path)
+	if not os.path.exists(directory):
+		os.mkdir(directory)
+	for each_file in efile:
+		shutil.copy(each_file,os.path.abspath(directory))
+
+def zip_to(path,zippath):
+	efile = get_special_path(path)
+	for each_file in efile:
+		cmd = 'zip -j'+' '+ zippath+' '+ each_file
+		asd=commands.getstatusoutput(cmd)
+ 
+
